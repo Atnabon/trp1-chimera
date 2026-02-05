@@ -1,0 +1,14 @@
+[project]
+name = "trp1-chimera"
+version = "0.1.0"
+description = "The core agentic operating system for the AiQEM Autonomous Influencer Network. Built with MCP-standardized connectivity, Swarm orchestration, and on-chain economic agency via Coinbase AgentKit."
+authors = [
+    {name = "Atnabon Deressa", email = "atnabond@gmail.com"}
+]
+dependencies = [
+    "requests",
+    "pandas",
+    
+    "pytest",
+    "pydantic",
+]

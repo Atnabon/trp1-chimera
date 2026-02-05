@@ -1,0 +1,43 @@
+# Chimera Project: Docker Ignore File
+# Traceability:
+# - Challenge Document: Task 3.2
+# - SRS: Section 2.3 (Operational Environment)
+# - Task 1 Report: Section 8 (Scalability & Fault Tolerance)
+
+# Ignore version control
+.git
+.gitignore
+
+# Ignore virtual environment
+venv/
+.venv/
+
+# Ignore IDE and editor files
+.idea/
+.vscode/
+.cursor/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Ignore documentation and notes not needed for runtime
+challeng docs /
+nots/
+research/
+resurch/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore build artifacts and local config
+*.log
+*.egg-info
+dist/
+build/
+
+# Don't copy the Dockerfile or Makefile into the image itself
+Dockerfile
+Makefile
