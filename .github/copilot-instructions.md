@@ -87,7 +87,7 @@ Before generating any response, explicitly check:
 [ ] Are all applicable triggers accounted for?
 **\*** mandatory workflow **\*\***\***\*\***
 
-# GitHub Copilot Instructions – Dagmawi teferi
+# GitHub Copilot Instructions – Atnabon Deressa
 
 ## My Development Style and Expectations
 

@@ -46,6 +46,4 @@ This project follows a **Test-Driven Development (TDD)** methodology. The tests 
 
 Therefore, when you run `make test`, you should expect to see **failing tests**. This is the correct and desired outcome at this stage. These failures define the "empty slots" that need to be filled by implementing the agent skills according to the project's specifications.
 
-## CI/CD Pipeline
 
-This repository is equipped with a GitHub Actions workflow defined in `.github/workflows/main.yml`. This pipeline automatically runs the `make test` command on every push and pull request to the `main` branch, ensuring that all changes are continuously validated against the test suite.
