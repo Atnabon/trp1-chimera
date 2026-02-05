@@ -1,0 +1,167 @@
+# CodeRabbit Configuration
+# AI-powered code review for Project Chimera
+# Documentation: https://docs.coderabbit.ai/
+
+language: "en-US"
+
+# Review settings
+reviews:
+  # Enable automatic reviews on pull requests
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - main
+      - develop
+    
+  # Request changes vs comments
+  request_changes_workflow: true
+  
+  # High-level summary at the top of review
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai summary"
+  
+  # Review poem (fun feature)
+  poem: false
+  
+  # Walkthrough of changes
+  review_status: true
+  
+  # Path-based review configuration
+  path_filters:
+    # Always review these critical files
+    - path: "specs/**"
+      instructions: |
+        Review specifications for:
+        - Completeness of API contracts
+        - Consistency with _meta.md constraints
+        - Clear acceptance criteria for user stories
+        
+    - path: "skills/**/README.md"
+      instructions: |
+        Verify skill documentation includes:
+        - Complete input/output contracts (TypeScript interfaces)
+        - Error codes and handling
+        - Usage examples
+        - Test cases table
+        
+    - path: "src/**/*.py"
+      instructions: |
+        Review Python code for:
+        - Type hints on all functions
+        - Docstrings with examples
+        - Error handling patterns
+        - Adherence to MCP protocol
+        
+    - path: "tests/**"
+      instructions: |
+        Ensure tests:
+        - Follow TDD pattern (tests before implementation)
+        - Cover happy path and error cases
+        - Use meaningful test names
+        - Include fixtures and proper mocking
+        
+    - path: "Dockerfile*"
+      instructions: |
+        Check Docker configuration for:
+        - Multi-stage build efficiency
+        - Security best practices (non-root user)
+        - Proper layer caching
+        - Health checks
+        
+    - path: ".github/workflows/**"
+      instructions: |
+        Review CI/CD for:
+        - Spec validation step presence
+        - Test coverage requirements
+        - Security scanning
+        - Proper caching
+
+# Chat configuration
+chat:
+  # Allow @coderabbitai mentions for questions
+  auto_reply: true
+
+# Tone and style
+tone_instructions: |
+  You are reviewing code for Project Chimera, an autonomous influencer network.
+  
+  Key constraints to enforce:
+  1. SPEC-FIRST: No implementation without corresponding specification
+  2. MCP-ONLY: All external interactions must use Model Context Protocol
+  3. SWARM PATTERN: Verify Planner-Worker-Judge architecture is followed
+  4. TDD: Tests should be written before implementation
+  
+  Be constructive but firm on architectural decisions.
+  Reference specific spec documents when relevant.
+
+# Early access features
+early_access: true
+
+# Knowledge base (custom context)
+knowledge_base:
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  jira:
+    project_keys: []
+  linear:
+    team_keys: []
+
+# Tools configuration  
+tools:
+  # GitHub-specific tools
+  github-checks:
+    enabled: true
+    timeout_ms: 90000
+    
+  # AST-based analysis
+  ast-grep:
+    enabled: true
+    essential_rules: true
+    rule_dirs: []
+    
+  # Shell script analysis
+  shellcheck:
+    enabled: true
+    
+  # Markdown linting
+  markdownlint:
+    enabled: true
+    
+  # YAML validation
+  yamllint:
+    enabled: true
+    
+  # Python-specific
+  ruff:
+    enabled: true
+    
+  # Biome for JS/TS (if any MCP servers use it)
+  biome:
+    enabled: true
+
+# Custom rules (path-based instructions)
+path_instructions:
+  - path: "**/*.py"
+    instructions: |
+      Ensure all functions have:
+      - Type hints for parameters and return values
+      - Docstrings following Google style
+      - Proper error handling with custom exceptions
+      
+  - path: "specs/**"
+    instructions: |
+      Validate that specifications:
+      - Have version and status metadata
+      - Include Mermaid diagrams where appropriate
+      - Define clear API contracts with JSON schemas
+      - Reference other specs correctly
+      
+  - path: "CLAUDE.md"
+    instructions: |
+      This is the AI context file. Ensure it:
+      - Contains accurate project description
+      - Lists critical constraints
+      - Provides clear agent directives
