@@ -1,6 +1,8 @@
 # Trp1 Chimera
 
-**Project Chimera** is the foundational infrastructure for an autonomous AI influencer network. This repository contains the "Agentic Operating System" designed to manage a fleet of AI agents that can research trends, generate content, and manage engagement without direct human intervention for every action.
+Project Chimera is an infrastructure project to build the "Factory" that creates **Autonomous AI Influencers** - a fleet of AI-powered virtual influencers capable of researching trends, generating content, and managing engagement at scale.
+
+This repository contains the **specifications, tests, and tooling** required for AI agents (and humans) to build the final implementation using a spec-driven development approach.
 
 ## Getting Started
 
@@ -11,41 +13,69 @@
 -   [Make](https://www.gnu.org/software/make/)
 -   Python 3.11+ (for local setup)
 
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Atnabon/trp1-chimera
-    cd trp1-chimera
-    ```
-
-2.  **Set up the local environment:**
-    This command creates a Python virtual environment and installs the dependencies listed in `pyproject.toml`. It prefers `uv` for speed but will fall back to `pip` if `uv` is not installed.
-    ```bash
-    make setup
-    ```
-
-## How to Run & Test with Docker
-
-This project uses Docker to ensure a clean, consistent, and reliable testing environment. The primary way to run the project's test suite is via the `Makefile`.
-
-**To run the tests:**
+## Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/Atnabon/trp1-chimera
+cd project-chimera
+
+# Setup environment
+make setup
+
+# Run tests (they will fail - TDD approach)
 make test
+
+# Run spec validation
+make spec-check
+
+# Start development services
+make dev
 ```
 
-**What this command does:**
+## Development Philosophy
 
-1.  It builds a Docker image from the `Dockerfile`, installing all necessary dependencies in a clean environment.
-2.  It runs the project's test suite (using `pytest`) inside a new container created from that image.
+**"Intent (Specs) is the source of truth, Infrastructure (CI/CD, Tests, Docker) ensures reliability."**
 
-### Important: Expect Test Failures
+1. **Spec-Driven Development**: No code without specifications
+2. **Test-Driven Development**: Failing tests define requirements
+3. **Traceability**: Tenx MCP Sense tracks all AI interactions
+4. **Git Hygiene**: Commit early, commit often
 
-This project follows a **Test-Driven Development (TDD)** methodology. The tests in the `tests/` directory have been written *before* the full implementation of the skills.
+## MCP Configuration
 
-Therefore, when you run `make test`, you should expect to see **failing tests**. This is the correct and desired outcome at this stage. These failures define the "empty slots" that need to be filled by implementing the agent skills according to the project's specifications.
+This project requires connection to Tenx MCP Sense for telemetry:
 
-## CI/CD Pipeline
+```json
+{
+  "mcpServers": {
+    "tenxfeedbackanalytics": {
+      "url": "https://mcppulse.10academy.org/proxy",
+      "type": "http"
+    }
+  }
+}
+```
 
-This repository is equipped with a GitHub Actions workflow defined in `.github/workflows/main.yml`. This pipeline automatically runs the `make test` command on every push and pull request to the `main` branch, ensuring that all changes are continuously validated against the test suite.
+## Commands
+
+```bash
+# Development
+make setup           # Create venv and install deps
+make dev             # Start dev services (Redis, Postgres, Weaviate)
+make test            # Run test suite
+make test-cov        # Run tests with coverage
+
+# Quality
+make lint            # Run linters
+make format          # Format code
+make typecheck       # Type checking
+make spec-check      # Validate specifications
+
+# Docker
+make docker-build    # Build all images
+make docker-up       # Start full stack
+make docker-down     # Stop services
+make docker-logs     # View logs
+```
+
