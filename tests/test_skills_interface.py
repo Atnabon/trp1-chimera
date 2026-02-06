@@ -90,7 +90,6 @@ class TestSkillsInputContracts(unittest.TestCase):
                 with open(schema_path, 'r') as f:
                     self.schemas[skill_name] = json.load(f)
 
-    @unittest.expectedFailure
     def test_trend_fetcher_input_contract(self):
         """
         Test trend_fetcher input contract validation.
@@ -108,13 +107,12 @@ class TestSkillsInputContracts(unittest.TestCase):
             }
         }
         
-        # This will fail until skill is implemented
+        # Skills module exists, but implementation is pending
         self.assertIsNotNone(
             fetch_trends,
             "fetch_trends function must be implemented in skills.trend_fetcher"
         )
 
-    @unittest.expectedFailure
     def test_content_generator_input_contract(self):
         """
         Test content_generator input contract validation.
@@ -133,13 +131,12 @@ class TestSkillsInputContracts(unittest.TestCase):
             }
         }
         
-        # This will fail until skill is implemented
+        # Skills module exists, but implementation is pending
         self.assertIsNotNone(
             generate_content,
             "generate_content function must be implemented in skills.content_generator"
         )
 
-    @unittest.expectedFailure
     def test_engagement_manager_input_contract(self):
         """
         Test engagement_manager input contract validation.
@@ -158,7 +155,7 @@ class TestSkillsInputContracts(unittest.TestCase):
             }
         }
         
-        # This will fail until skill is implemented
+        # Skills module exists, but implementation is pending
         self.assertIsNotNone(
             manage_engagement,
             "manage_engagement function must be implemented in skills.engagement_manager"
