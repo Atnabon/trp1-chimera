@@ -31,9 +31,9 @@ COPY requirements*.txt ./
 # Install dependencies - try pyproject.toml first, then fallback to requirements.txt
 RUN pip install --upgrade pip setuptools wheel && \
     if [ -f "requirements.txt" ]; then \
-    pip install -r requirements.txt; \
+        pip install -r requirements.txt; \
     else \
-    pip install -e ".[dev]"; \
+        pip install -e ".[dev]"; \
     fi
 
 # =============================================================================
