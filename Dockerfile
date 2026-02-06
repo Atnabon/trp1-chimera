@@ -28,9 +28,13 @@ WORKDIR /app
 COPY pyproject.toml ./
 COPY requirements*.txt ./
 
-# Install dependencies
+# Install dependencies - try pyproject.toml first, then fallback to requirements.txt
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install -e ".[dev]" || pip install -r requirements.txt
+    if [ -f "requirements.txt" ]; then \
+    pip install -r requirements.txt; \
+    else \
+    pip install -e ".[dev]"; \
+    fi
 
 # =============================================================================
 # Stage 2: Runtime
