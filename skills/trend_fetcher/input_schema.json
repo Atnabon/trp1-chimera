@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "trend_fetcher Input Schema",
+    "description": "Input contract for the trend_fetcher skill",
+    "type": "object",
+    "required": [
+        "skill_name",
+        "parameters"
+    ],
+    "properties": {
+        "skill_name": {
+            "type": "string",
+            "const": "trend_fetcher",
+            "description": "Skill identifier"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "region",
+                "category"
+            ],
+            "properties": {
+                "region": {
+                    "type": "string",
+                    "description": "Geographic region for trend analysis (e.g., 'ethiopia', 'global')"
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Category of trends (e.g., 'fashion', 'technology', 'crypto')"
+                },
+                "timeframe_hours": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 168,
+                    "default": 24,
+                    "description": "Time window for trend analysis in hours (default: 24)"
+                },
+                "relevance_threshold": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "default": 0.75,
+                    "description": "Minimum relevance score for trends to be included (default: 0.75)"
+                }
+            }
+        }
+    }
+}

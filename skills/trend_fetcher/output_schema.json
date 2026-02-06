@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "trend_fetcher Output Schema",
+    "description": "Output contract for the trend_fetcher skill",
+    "type": "object",
+    "required": [
+        "trends",
+        "metadata"
+    ],
+    "properties": {
+        "trends": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "topic",
+                    "engagement_score",
+                    "relevance_score"
+                ],
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "Trend topic name"
+                    },
+                    "engagement_score": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "maximum": 1.0,
+                        "description": "Engagement metric (0.0-1.0)"
+                    },
+                    "growth_rate": {
+                        "type": "string",
+                        "description": "Growth rate indicator (e.g., '+15%', '-5%')"
+                    },
+                    "sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "MCP Resource URIs that contributed to this trend"
+                    },
+                    "relevance_score": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "maximum": 1.0,
+                        "description": "Relevance score for the requesting agent (0.0-1.0)"
+                    }
+                }
+            },
+            "description": "List of trending topics sorted by relevance_score (descending)"
+        },
+        "metadata": {
+            "type": "object",
+            "required": [
+                "fetched_at",
+                "source_count",
+                "confidence"
+            ],
+            "properties": {
+                "fetched_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp when trends were fetched"
+                },
+                "source_count": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Number of sources successfully queried"
+                },
+                "confidence": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "description": "Overall confidence in the trend data (0.0-1.0)"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "engagement_manager Input Schema",
+    "description": "Input contract for the engagement_manager skill",
+    "type": "object",
+    "required": [
+        "skill_name",
+        "parameters"
+    ],
+    "properties": {
+        "skill_name": {
+            "type": "string",
+            "const": "engagement_manager",
+            "description": "Skill identifier"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "action",
+                "platform"
+            ],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "enum": [
+                        "reply",
+                        "like",
+                        "analyze",
+                        "follow",
+                        "dm"
+                    ],
+                    "description": "Engagement action to perform"
+                },
+                "platform": {
+                    "type": "string",
+                    "enum": [
+                        "twitter",
+                        "instagram",
+                        "tiktok",
+                        "linkedin"
+                    ],
+                    "description": "Social media platform"
+                },
+                "post_id": {
+                    "type": "string",
+                    "description": "ID of the post to engage with"
+                },
+                "comment_id": {
+                    "type": "string",
+                    "description": "ID of the comment to respond to"
+                },
+                "comment_text": {
+                    "type": "string",
+                    "description": "Text of the comment being responded to"
+                },
+                "persona_id": {
+                    "type": "string",
+                    "description": "Persona ID for voice consistency"
+                },
+                "user_id": {
+                    "type": "string",
+                    "description": "Target user ID for follow/dm actions"
+                }
+            }
+        }
+    }
+}

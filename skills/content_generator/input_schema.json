@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "content_generator Input Schema",
+    "description": "Input contract for the content_generator skill",
+    "type": "object",
+    "required": [
+        "skill_name",
+        "parameters"
+    ],
+    "properties": {
+        "skill_name": {
+            "type": "string",
+            "const": "content_generator",
+            "description": "Skill identifier"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "content_type",
+                "platform",
+                "topic"
+            ],
+            "properties": {
+                "content_type": {
+                    "type": "string",
+                    "enum": [
+                        "text",
+                        "image",
+                        "video",
+                        "multimodal"
+                    ],
+                    "description": "Type of content to generate"
+                },
+                "platform": {
+                    "type": "string",
+                    "enum": [
+                        "twitter",
+                        "instagram",
+                        "tiktok",
+                        "linkedin"
+                    ],
+                    "description": "Target social media platform"
+                },
+                "topic": {
+                    "type": "string",
+                    "description": "Topic or theme for content generation"
+                },
+                "persona_constraints": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Persona traits to align content with"
+                },
+                "character_reference_id": {
+                    "type": "string",
+                    "description": "ID of character LoRA for consistent appearance"
+                },
+                "tier": {
+                    "type": "string",
+                    "enum": [
+                        "filler",
+                        "regular",
+                        "hero"
+                    ],
+                    "default": "regular",
+                    "description": "Content quality tier affecting cost and effort"
+                },
+                "budget_limit_usdc": {
+                    "type": "number",
+                    "minimum": 0.01,
+                    "maximum": 100.00,
+                    "description": "Maximum budget for content generation in USDC"
+                }
+            }
+        }
+    }
+}

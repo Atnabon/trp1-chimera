@@ -1,0 +1,103 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "engagement_manager Output Schema",
+    "description": "Output contract for the engagement_manager skill",
+    "type": "object",
+    "required": [
+        "response",
+        "metadata"
+    ],
+    "properties": {
+        "response": {
+            "type": "object",
+            "required": [
+                "action_taken"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "Generated response text (for reply/dm actions)"
+                },
+                "action_taken": {
+                    "type": "string",
+                    "enum": [
+                        "reply",
+                        "like",
+                        "analyze",
+                        "follow",
+                        "dm",
+                        "skipped"
+                    ],
+                    "description": "Action that was performed"
+                },
+                "platform_response_id": {
+                    "type": "string",
+                    "description": "ID returned by the platform for the action"
+                },
+                "analysis_data": {
+                    "type": "object",
+                    "description": "Engagement analysis data (for analyze action)",
+                    "properties": {
+                        "total_engagement": {
+                            "type": "integer"
+                        },
+                        "sentiment_breakdown": {
+                            "type": "object",
+                            "properties": {
+                                "positive": {
+                                    "type": "number"
+                                },
+                                "neutral": {
+                                    "type": "number"
+                                },
+                                "negative": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "metadata": {
+            "type": "object",
+            "required": [
+                "persona_alignment",
+                "safety_score"
+            ],
+            "properties": {
+                "sentiment_detected": {
+                    "type": "string",
+                    "enum": [
+                        "positive",
+                        "neutral",
+                        "negative",
+                        "mixed"
+                    ],
+                    "description": "Detected sentiment of the input"
+                },
+                "persona_alignment": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "description": "How well response aligns with persona"
+                },
+                "safety_score": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "description": "Safety/appropriateness score"
+                },
+                "response_time_ms": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Time taken to generate response"
+                },
+                "requires_hitl": {
+                    "type": "boolean",
+                    "description": "Whether action requires human approval"
+                }
+            }
+        }
+    }
+}

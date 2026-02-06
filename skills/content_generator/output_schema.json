@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "content_generator Output Schema",
+    "description": "Output contract for the content_generator skill",
+    "type": "object",
+    "required": [
+        "content",
+        "metadata"
+    ],
+    "properties": {
+        "content": {
+            "type": "object",
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "Generated text content (caption/post)"
+                },
+                "media_urls": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "description": "URLs of generated media (images/videos)"
+                },
+                "media_type": {
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "video",
+                        "carousel"
+                    ],
+                    "description": "Type of media generated"
+                },
+                "hashtags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Suggested hashtags for the post"
+                }
+            }
+        },
+        "metadata": {
+            "type": "object",
+            "required": [
+                "generation_id",
+                "persona_alignment",
+                "safety_score"
+            ],
+            "properties": {
+                "generation_id": {
+                    "type": "string",
+                    "description": "Unique identifier for this generation"
+                },
+                "persona_alignment": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "description": "How well content aligns with persona (0.0-1.0)"
+                },
+                "safety_score": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "description": "Safety/appropriateness score (0.0-1.0)"
+                },
+                "cost_usdc": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "description": "Actual cost of generation in USDC"
+                },
+                "generation_time_ms": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Time taken to generate content in milliseconds"
+                }
+            }
+        }
+    }
+}
