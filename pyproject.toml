@@ -1,7 +1,7 @@
 [project]
 name = "project-chimera"
 version = "0.1.0"
-description = "Autonomous Influencer Network - Infrastructure for AI Agent Content Creation"
+description = "Autonomous AI Influencer OS with MCP connectivity and Swarm orchestration."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
